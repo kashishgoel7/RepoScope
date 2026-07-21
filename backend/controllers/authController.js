@@ -73,9 +73,8 @@ export const registerUser = async (req, res) => {
  * @route   POST /api/auth/login
  * @access  Public
  */
-export const registerUser = async (req, res) => {
-  console.log("✅ Register API hit");
-  console.log("Body:", req.body);
+export const loginUser = async (req, res) => {
+  console.log("✅ Login API hit");
 
   const { email, password } = req.body;
 
@@ -86,19 +85,20 @@ export const registerUser = async (req, res) => {
   }
 
   try {
-    // Find user
     const user = await User.findOne({ email });
+
     if (!user) {
       return res.status(401).json({ message: "Invalid email or password" });
     }
 
-    // Check password
     const isMatch = await user.matchPassword(password);
+
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid email or password" });
     }
 
     const token = generateToken(res, user._id);
+
     res.json({
       _id: user._id,
       email: user.email,
