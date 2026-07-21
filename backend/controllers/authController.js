@@ -1,18 +1,22 @@
-import User from '../models/User.js';
-import jwt from 'jsonwebtoken';
+import User from "../models/User.js";
+import jwt from "jsonwebtoken";
 
 /**
  * Generate a JWT token and set it in an httpOnly cookie
  */
 const generateToken = (res, userId) => {
-  const token = jwt.sign({ id: userId }, process.env.JWT_SECRET || 'fallback_secret_for_reposcope_123', {
-    expiresIn: '30d',
-  });
+  const token = jwt.sign(
+    { id: userId },
+    process.env.JWT_SECRET || "fallback_secret_for_reposcope_123",
+    {
+      expiresIn: "30d",
+    },
+  );
 
-  res.cookie('token', token, {
+  res.cookie("token", token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
     maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
   });
 
@@ -28,14 +32,18 @@ export const registerUser = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(400).json({ message: 'Please provide email and password' });
+    return res
+      .status(400)
+      .json({ message: "Please provide email and password" });
   }
 
   try {
     // Check if user already exists
     const userExists = await User.findOne({ email });
     if (userExists) {
-      return res.status(400).json({ message: 'User already exists with this email' });
+      return res
+        .status(400)
+        .json({ message: "User already exists with this email" });
     }
 
     // Create user (password will be hashed by pre-save hook)
@@ -52,10 +60,10 @@ export const registerUser = async (req, res) => {
         token, // optional: returned to client in case they prefer headers
       });
     } else {
-      res.status(400).json({ message: 'Invalid user data' });
+      res.status(400).json({ message: "Invalid user data" });
     }
   } catch (error) {
-    console.error('Registration error:', error.message);
+    console.error("Registration error:", error.message);
     res.status(500).json({ message: error.message });
   }
 };
@@ -65,24 +73,29 @@ export const registerUser = async (req, res) => {
  * @route   POST /api/auth/login
  * @access  Public
  */
-export const loginUser = async (req, res) => {
+export const registerUser = async (req, res) => {
+  console.log("✅ Register API hit");
+  console.log("Body:", req.body);
+
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(400).json({ message: 'Please provide email and password' });
+    return res
+      .status(400)
+      .json({ message: "Please provide email and password" });
   }
 
   try {
     // Find user
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(401).json({ message: 'Invalid email or password' });
+      return res.status(401).json({ message: "Invalid email or password" });
     }
 
     // Check password
     const isMatch = await user.matchPassword(password);
     if (!isMatch) {
-      return res.status(401).json({ message: 'Invalid email or password' });
+      return res.status(401).json({ message: "Invalid email or password" });
     }
 
     const token = generateToken(res, user._id);
@@ -92,7 +105,7 @@ export const loginUser = async (req, res) => {
       token,
     });
   } catch (error) {
-    console.error('Login error:', error.message);
+    console.error("Login error:", error.message);
     res.status(500).json({ message: error.message });
   }
 };
@@ -103,11 +116,11 @@ export const loginUser = async (req, res) => {
  * @access  Public
  */
 export const logoutUser = (req, res) => {
-  res.cookie('token', '', {
+  res.cookie("token", "", {
     httpOnly: true,
     expires: new Date(0),
   });
-  res.status(200).json({ message: 'Logged out successfully' });
+  res.status(200).json({ message: "Logged out successfully" });
 };
 
 /**
@@ -122,6 +135,6 @@ export const getUserProfile = async (req, res) => {
       email: req.user.email,
     });
   } else {
-    res.status(404).json({ message: 'User not found' });
+    res.status(404).json({ message: "User not found" });
   }
 };
