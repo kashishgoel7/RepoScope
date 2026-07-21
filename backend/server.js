@@ -36,7 +36,7 @@ app.use(helmet());
 // Cross-Origin Resource Sharing
 app.use(
   cors({
-    origin: true,
+    origin: (process.env.CLIENT_URL || "http://localhost:5173").trim(),
     credentials: true,
   }),
 );
