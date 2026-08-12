@@ -102,10 +102,10 @@ const formatMessage = (text) => {
         return <strong key={`${lineKey}-b-${i}`} className="font-bold text-white">{part.text}</strong>;
       }
       if (part.type === 'inline-code') {
-        return <code key={`${lineKey}-c-${i}`} className="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-800 text-xs font-mono text-indigo-400">{part.text}</code>;
+        return <code key={`${lineKey}-c-${i}`} className="px-1.5 py-0.5 rounded bg-zinc-900 border border-zinc-800 text-xs font-mono text-zinc-350">{part.text}</code>;
       }
       if (part.type === 'link') {
-        return <a key={`${lineKey}-l-${i}`} href={part.url} target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:underline">{part.text}</a>;
+        return <a key={`${lineKey}-l-${i}`} href={part.url} target="_blank" rel="noopener noreferrer" className="text-zinc-300 hover:text-white hover:underline">{part.text}</a>;
       }
       return <span key={`${lineKey}-t-${i}`}>{part.text}</span>;
     });
@@ -116,7 +116,7 @@ const formatMessage = (text) => {
       {blocks.map((block, blockIdx) => {
         if (block.type === 'code') {
           return (
-            <div key={`block-${blockIdx}`} className="my-2.5 border border-slate-800 bg-slate-950 rounded-lg p-3.5 font-mono text-xs overflow-x-auto text-violet-300">
+            <div key={`block-${blockIdx}`} className="my-2.5 border border-zinc-800 bg-black rounded-lg p-3.5 font-mono text-xs overflow-x-auto text-zinc-300">
               <pre className="whitespace-pre"><code>{block.content.trim()}</code></pre>
             </div>
           );
@@ -273,15 +273,15 @@ const ChatPanel = ({ analysis }) => {
   ];
 
   return (
-    <div className="flex flex-col h-[600px] border border-slate-800 bg-slate-950/20 rounded-xl overflow-hidden backdrop-blur-md animate-fade-in">
+    <div className="flex flex-col h-[600px] border border-zinc-800 bg-black rounded-xl overflow-hidden backdrop-blur-md animate-fade-in">
       {/* Panel Header */}
-      <div className="flex items-center gap-2.5 px-6 py-4 border-b border-slate-800 bg-slate-950/60 shrink-0">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+      <div className="flex items-center gap-2.5 px-6 py-4 border-b border-zinc-800 bg-zinc-950/60 shrink-0">
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-900 text-white border border-zinc-800">
           <MessageSquare className="h-4.5 w-4.5" />
         </div>
         <div>
           <h3 className="text-sm font-bold text-white">Ask Questions about Code</h3>
-          <p className="text-[10px] text-slate-500">
+          <p className="text-[10px] text-zinc-500">
             Q&A is scoped using the analyzed key codebase file footprint.
           </p>
         </div>
@@ -291,12 +291,12 @@ const ChatPanel = ({ analysis }) => {
       <div className="flex-grow p-6 overflow-y-auto space-y-5 scrollbar-thin">
         {messages.length === 0 ? (
           <div className="h-full flex flex-col justify-center items-center text-center max-w-xl mx-auto space-y-6">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500/5 text-indigo-400 border border-indigo-500/10 animate-pulse">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-zinc-900 text-zinc-400 border border-zinc-800 animate-pulse">
               <Sparkles className="h-6 w-6" />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-slate-300">Start an Interactive Audit</h4>
-              <p className="text-xs text-slate-500 mt-1 max-w-sm leading-relaxed">
+              <h4 className="text-sm font-bold text-zinc-300">Start an Interactive Audit</h4>
+              <p className="text-xs text-zinc-500 mt-1 max-w-sm leading-relaxed">
                 Ask specific questions about codebase design, security red flags, logic constructs, or error propagation.
               </p>
             </div>
@@ -306,7 +306,7 @@ const ChatPanel = ({ analysis }) => {
                 <button
                   key={idx}
                   onClick={() => setInput(prompt)}
-                  className="p-3 text-xs text-slate-400 rounded-lg border border-slate-900 bg-slate-950/45 hover:border-indigo-500/35 hover:text-white transition-all duration-200 cursor-pointer"
+                  className="p-3 text-xs text-zinc-400 rounded-lg border border-zinc-800 bg-zinc-950/45 hover:border-zinc-650 hover:text-white transition-all duration-200 cursor-pointer"
                 >
                   {prompt}
                 </button>
@@ -323,12 +323,12 @@ const ChatPanel = ({ analysis }) => {
                 <div
                   className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed border ${
                     msg.role === 'user'
-                      ? 'bg-slate-900 border-slate-800 text-slate-100 rounded-tr-none'
-                      : 'bg-indigo-600/5 border-indigo-500/10 rounded-tl-none'
+                      ? 'bg-zinc-900 border-zinc-800 text-zinc-100 rounded-tr-none'
+                      : 'bg-zinc-950 border-zinc-900 rounded-tl-none text-zinc-300'
                   }`}
                 >
                   {msg.role === 'user' ? (
-                    <p className="whitespace-pre-line text-slate-200 font-medium">{msg.message}</p>
+                    <p className="whitespace-pre-line text-zinc-200 font-medium">{msg.message}</p>
                   ) : (
                     formatMessage(msg.message)
                   )}
@@ -338,12 +338,12 @@ const ChatPanel = ({ analysis }) => {
             
             {loading && (
               <div className="flex justify-start animate-pulse">
-                <div className="max-w-[85%] rounded-2xl rounded-tl-none px-4 py-3 text-sm bg-indigo-600/5 border border-indigo-500/10 text-indigo-400">
+                <div className="max-w-[85%] rounded-2xl rounded-tl-none px-4 py-3 text-sm bg-zinc-950 border border-zinc-900 text-zinc-300">
                   <div className="flex items-center gap-2">
-                    <div className="h-2 w-2 bg-indigo-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <div className="h-2 w-2 bg-indigo-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <div className="h-2 w-2 bg-indigo-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
-                    <span className="text-[11px] text-indigo-400/80 ml-1 font-bold uppercase tracking-wider">RepoScope is thinking...</span>
+                    <div className="h-2 w-2 bg-zinc-450 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                    <div className="h-2 w-2 bg-zinc-450 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                    <div className="h-2 w-2 bg-zinc-450 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                    <span className="text-[11px] text-zinc-400 ml-1 font-bold uppercase tracking-wider">RepoScope is thinking...</span>
                   </div>
                 </div>
               </div>
@@ -363,8 +363,8 @@ const ChatPanel = ({ analysis }) => {
       </div>
 
       {/* Input Form */}
-      <form onSubmit={handleSend} className="p-4 border-t border-slate-800 bg-slate-950/40 shrink-0">
-        <div className="relative flex items-center bg-slate-900/60 border border-slate-800 focus-within:border-indigo-500/60 focus-within:ring-2 focus-within:ring-indigo-500/15 p-1.5 rounded-xl transition-all">
+      <form onSubmit={handleSend} className="p-4 border-t border-zinc-800 bg-zinc-950/40 shrink-0">
+        <div className="relative flex items-center bg-zinc-900/60 border border-zinc-800 focus-within:border-zinc-400 focus-within:ring-2 focus-within:ring-zinc-400/15 p-1.5 rounded-xl transition-all">
           <input
             type="text"
             required
@@ -372,12 +372,12 @@ const ChatPanel = ({ analysis }) => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask about this repository..."
-            className="block w-full bg-transparent pl-3 pr-12 py-2 text-xs text-white placeholder-slate-500 focus:outline-none disabled:opacity-50"
+            className="block w-full bg-transparent pl-3 pr-12 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none disabled:opacity-50"
           />
           <button
             type="submit"
             disabled={loading || !input.trim()}
-            className="absolute right-2 p-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-500 transition-all duration-200 disabled:opacity-30 disabled:hover:bg-indigo-600 cursor-pointer"
+            className="absolute right-2 p-2 rounded-lg bg-white text-zinc-950 hover:bg-zinc-100 transition-all duration-200 disabled:opacity-30 disabled:hover:bg-white cursor-pointer"
           >
             <Send className="h-3.5 w-3.5" />
           </button>

@@ -8,24 +8,24 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const FolderIcon = ({ isOpen }) => {
-  return isOpen ? <FolderOpen className="h-4 w-4 text-indigo-400 shrink-0" /> : <Folder className="h-4 w-4 text-indigo-400 shrink-0" />;
+  return isOpen ? <FolderOpen className="h-4 w-4 text-zinc-400 shrink-0" /> : <Folder className="h-4 w-4 text-zinc-400 shrink-0" />;
 };
 
 const FileIcon = ({ filename }) => {
   const ext = filename.split('.').pop().toLowerCase();
   if (['js', 'jsx', 'ts', 'tsx', 'py', 'go', 'rs', 'c', 'cpp', 'java', 'kt', 'swift', 'sh'].includes(ext)) {
-    return <FileCode className="h-4 w-4 text-violet-400 shrink-0" />;
+    return <FileCode className="h-4 w-4 text-zinc-400 shrink-0" />;
   }
   if (['json', 'yaml', 'yml'].includes(ext)) {
-    return <FileJson className="h-4 w-4 text-amber-400 shrink-0" />;
+    return <FileJson className="h-4 w-4 text-zinc-400 shrink-0" />;
   }
   if (['md', 'txt'].includes(ext)) {
-    return <FileText className="h-4 w-4 text-emerald-400 shrink-0" />;
+    return <FileText className="h-4 w-4 text-zinc-400 shrink-0" />;
   }
   if (['config', 'env', 'gitignore'].includes(filename) || ext === 'config' || ext === 'env' || filename.startsWith('.')) {
-    return <Settings className="h-4 w-4 text-slate-400 shrink-0" />;
+    return <Settings className="h-4 w-4 text-zinc-400 shrink-0" />;
   }
-  return <File className="h-4 w-4 text-slate-400 shrink-0" />;
+  return <File className="h-4 w-4 text-zinc-400 shrink-0" />;
 };
 
 // Check if file is binary by extension
@@ -77,10 +77,10 @@ const FileNode = ({ item, onFileClick, selectedPath, analysisId }) => {
         onClick={handleToggle}
         className={`flex items-center gap-2 py-1 px-2 rounded-lg cursor-pointer transition-all duration-150 ${
           isSelected 
-            ? 'bg-indigo-600/25 text-white border border-indigo-500/30' 
+            ? 'bg-zinc-800 text-white border border-zinc-700' 
             : item.type === 'dir' 
-              ? 'hover:bg-slate-900/60 text-slate-300 hover:text-white border border-transparent' 
-              : 'hover:bg-slate-900/80 text-slate-400 hover:text-white border border-transparent'
+              ? 'hover:bg-zinc-900/60 text-zinc-300 hover:text-white border border-transparent' 
+              : 'hover:bg-zinc-900/80 text-zinc-400 hover:text-white border border-transparent'
         }`}
       >
         {item.type === 'dir' && (
@@ -91,7 +91,7 @@ const FileNode = ({ item, onFileClick, selectedPath, analysisId }) => {
         {item.type === 'dir' ? (
           <>
             {loading ? (
-              <div className="h-3.5 w-3.5 border-2 border-indigo-500/25 border-t-indigo-500 rounded-full animate-spin shrink-0" />
+              <div className="h-3.5 w-3.5 border-2 border-zinc-800 border-t-white rounded-full animate-spin shrink-0" />
             ) : (
               <FolderIcon isOpen={isOpen} />
             )}
@@ -320,8 +320,8 @@ const FileExplorer = ({ analysisId }) => {
     if (fetchingFile) {
       return (
         <div className="flex flex-col items-center justify-center h-full min-h-[400px]">
-          <div className="h-8 w-8 border-4 border-indigo-500/20 border-t-indigo-500 rounded-full animate-spin" />
-          <span className="mt-4 text-[10px] tracking-widest text-slate-500 uppercase font-semibold">Loading content...</span>
+          <div className="h-8 w-8 border-4 border-zinc-800 border-t-white rounded-full animate-spin" />
+          <span className="mt-4 text-[10px] tracking-widest text-zinc-500 uppercase font-semibold">Loading content...</span>
         </div>
       );
     }
@@ -329,17 +329,17 @@ const FileExplorer = ({ analysisId }) => {
     return (
       <div className="relative h-full flex flex-col animate-fade-in">
         {/* Code Header Bar */}
-        <div className="flex justify-between items-center bg-slate-900/60 border-b border-slate-800 px-4 py-2.5 rounded-t-lg">
-          <span className="text-xs font-semibold text-slate-300 font-mono select-all truncate max-w-md">
+        <div className="flex justify-between items-center bg-zinc-900 px-4 py-2.5 rounded-t-lg">
+          <span className="text-xs font-semibold text-zinc-300 font-mono select-all truncate max-w-md">
             {selectedFile.path}
           </span>
-          <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider bg-slate-950 px-2 py-0.5 rounded border border-slate-800 font-mono">
+          <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider bg-black px-2 py-0.5 rounded border border-zinc-800 font-mono">
             {(selectedFile.size / 1024).toFixed(1)} KB
           </span>
         </div>
         
         {/* syntax highlighting window */}
-        <div className="flex-grow overflow-auto p-4 bg-slate-950 rounded-b-lg max-h-[600px] border border-slate-900 border-t-0 font-mono">
+        <div className="flex-grow overflow-auto p-4 bg-black rounded-b-lg max-h-[600px] border border-zinc-900 border-t-0 font-mono">
           <SyntaxHighlighter
             language={getLanguage(selectedFile.path)}
             style={vscDarkPlus}
@@ -362,8 +362,8 @@ const FileExplorer = ({ analysisId }) => {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center py-20 min-h-[300px]">
-        <div className="h-8 w-8 border-3 border-indigo-500/20 border-t-indigo-500 rounded-full animate-spin" />
-        <span className="mt-4 text-xs font-semibold text-slate-400 tracking-wider">LOADING FILE EXPLORER...</span>
+        <div className="h-8 w-8 border-3 border-zinc-800 border-t-white rounded-full animate-spin" />
+        <span className="mt-4 text-xs font-semibold text-zinc-400 tracking-wider">LOADING FILE EXPLORER...</span>
       </div>
     );
   }
@@ -381,12 +381,12 @@ const FileExplorer = ({ analysisId }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-6 min-h-[500px] animate-fade-in">
       {/* File Tree Sidebar */}
-      <div className="col-span-1 border border-slate-800 bg-slate-950/30 p-3 rounded-xl max-h-[700px] overflow-y-auto space-y-1 scrollbar-thin">
-        <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider border-b border-slate-900/60 pb-2 mb-3">
+      <div className="col-span-1 border border-zinc-800 bg-zinc-950/30 p-3 rounded-xl max-h-[700px] overflow-y-auto space-y-1 scrollbar-thin">
+        <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-wider border-b border-zinc-900/60 pb-2 mb-3">
           Repository Tree
         </h4>
         {rootItems.length === 0 ? (
-          <div className="text-xs text-slate-600 italic p-2">No files found.</div>
+          <div className="text-xs text-zinc-600 italic p-2">No files found.</div>
         ) : (
           rootItems.map(item => (
             <FileNode 
@@ -401,7 +401,7 @@ const FileExplorer = ({ analysisId }) => {
       </div>
 
       {/* Code Viewer Panel */}
-      <div className="col-span-3 border border-slate-800 bg-slate-950/20 rounded-xl max-h-[700px] overflow-hidden">
+      <div className="col-span-3 border border-zinc-800 bg-black rounded-xl max-h-[700px] overflow-hidden">
         {renderCodePaneContent()}
       </div>
     </div>

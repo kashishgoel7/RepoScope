@@ -6,7 +6,7 @@
 }
 
 body {
-  background-color: #020617; /* slate-950 */
+  background-color: #080808; /* solid black/monochrome */
   font-family: var(--font-sans);
 }
 
@@ -16,16 +16,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #020617; /* slate-950 */
+  background: #080808;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b; /* slate-800 */
+  background: #27272a; /* zinc-800 */
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155; /* slate-700 */
+  background: #3f3f46; /* zinc-700 */
 }
 
 /* Custom Animations */

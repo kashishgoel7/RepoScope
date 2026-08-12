@@ -3,17 +3,13 @@ import React from 'react';
 const MetricCard = ({ title, value, icon: Icon, description, gradient, trend }) => {
   return (
     <div className="relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900/60 p-5 backdrop-blur-md transition-all duration-300 hover:border-slate-700 hover:shadow-lg hover:shadow-slate-950/40">
-      {/* Decorative gradient overlay */}
-      {gradient && (
-        <div className={`absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-10 blur-2xl ${gradient}`} />
-      )}
       
       <div className="flex items-center justify-between">
         <span className="text-sm font-semibold tracking-wide text-slate-400">
           {title}
         </span>
         {Icon && (
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-800/80 text-indigo-400 border border-slate-700">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-800/80 text-zinc-400 border border-slate-700">
             <Icon className="h-4.5 w-4.5" />
           </div>
         )}

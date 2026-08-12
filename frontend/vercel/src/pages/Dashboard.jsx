@@ -63,19 +63,17 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-slate-950 text-slate-100 py-10 px-4 sm:px-6 lg:px-8 relative">
+    <div className="min-h-[calc(100vh-4rem)] bg-black text-zinc-100 py-10 px-4 sm:px-6 lg:px-8 relative">
       {/* Dynamic ambient bg lighting */}
-      <div className="absolute top-10 right-10 w-96 h-96 bg-indigo-600/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-10 left-10 w-96 h-96 bg-violet-600/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="mx-auto max-w-7xl relative">
         {/* Page Header */}
         {!analysis && !loading && (
           <div className="text-center max-w-3xl mx-auto mt-8 mb-12">
-            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-100 to-indigo-300">
+            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl text-white">
               Analyze Any GitHub Repository
             </h1>
-            <p className="mt-4 text-base sm:text-lg text-slate-400 leading-relaxed">
+            <p className="mt-4 text-base sm:text-lg text-zinc-400 leading-relaxed">
               Paste a public GitHub repository URL to receive an AI-powered analysis of its architecture, code quality, best practices, and improvement recommendations powered by Google Gemini.
             </p>
           </div>
@@ -84,8 +82,8 @@ const Dashboard = () => {
         {/* Search Bar Input */}
         {!loading && !analysis && (
           <div className="max-w-3xl mx-auto">
-            <form onSubmit={handleAnalyze} className="relative flex items-center bg-slate-900/60 border border-slate-800 focus-within:border-indigo-500/60 focus-within:ring-2 focus-within:ring-indigo-500/20 p-2 rounded-2xl backdrop-blur-xl shadow-2xl transition-all duration-300">
-              <div className="flex items-center pl-4 text-slate-500 pointer-events-none">
+            <form onSubmit={handleAnalyze} className="relative flex items-center bg-zinc-900/60 border border-zinc-800 focus-within:border-zinc-400 focus-within:ring-2 focus-within:ring-zinc-400/20 p-2 rounded-2xl backdrop-blur-xl shadow-2xl transition-all duration-300">
+              <div className="flex items-center pl-4 text-zinc-500 pointer-events-none">
                 <Search className="h-5 w-5" />
               </div>
               <input
@@ -94,17 +92,17 @@ const Dashboard = () => {
                 value={repoUrl}
                 onChange={(e) => setRepoUrl(e.target.value)}
                 placeholder="https://github.com/facebook/react"
-                className="block w-full bg-transparent pl-3.5 pr-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none"
+                className="block w-full bg-transparent pl-3.5 pr-4 py-3 text-sm text-white placeholder-zinc-500 focus:outline-none"
               />
               <button
                 type="submit"
-                className="rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/35 transition-all duration-200"
+                className="rounded-xl bg-white hover:bg-zinc-100 px-6 py-3 text-sm font-bold text-zinc-950 transition-all duration-200"
               >
                 Scan Repository
               </button>
             </form>
 
-            <div className="mt-4 text-center text-xs text-slate-500 font-medium">
+            <div className="mt-4 text-center text-xs text-zinc-500 font-medium">
               Supports analysis of public GitHub repositories.
             </div>
 
@@ -121,18 +119,18 @@ const Dashboard = () => {
 
         {/* Loading State Animation */}
         {loading && (
-          <div className="max-w-2xl mx-auto text-center py-20 flex flex-col items-center justify-center border border-slate-800 bg-slate-900/20 rounded-2xl backdrop-blur-lg">
+          <div className="max-w-2xl mx-auto text-center py-20 flex flex-col items-center justify-center border border-zinc-800 bg-zinc-900/20 rounded-2xl backdrop-blur-lg">
             <div className="relative flex items-center justify-center mb-8">
               {/* Spinning core */}
-              <div className="w-24 h-24 border-4 border-indigo-500/10 border-t-indigo-500 rounded-full animate-spin"></div>
-              <div className="absolute w-16 h-16 border-4 border-violet-500/20 border-t-violet-400 rounded-full animate-spin animate-reverse"></div>
-              <div className="absolute text-slate-400 animate-pulse">
-                <Layers className="h-7 w-7 text-indigo-400" />
+              <div className="w-24 h-24 border-4 border-zinc-800 border-t-white rounded-full animate-spin"></div>
+              <div className="absolute w-16 h-16 border-4 border-zinc-900 border-t-zinc-400 rounded-full animate-spin animate-reverse"></div>
+              <div className="absolute text-zinc-400 animate-pulse">
+                <Layers className="h-7 w-7 text-zinc-300" />
               </div>
             </div>
 
             <h3 className="text-xl font-bold text-white mb-2">Analyzing Codebase</h3>
-            <p className="text-sm text-slate-400 px-6 max-w-md min-h-[40px] transition-all duration-300">
+            <p className="text-sm text-zinc-400 px-6 max-w-md min-h-[40px] transition-all duration-300">
               {steps[loadingStep] || 'Processing request...'}
             </p>
 
@@ -142,7 +140,7 @@ const Dashboard = () => {
                 <div 
                   key={idx} 
                   className={`h-1 w-8 rounded-full transition-all duration-300 ${
-                    idx <= loadingStep ? 'bg-indigo-500' : 'bg-slate-800'
+                    idx <= loadingStep ? 'bg-white' : 'bg-zinc-800'
                   }`}
                 />
               ))}
@@ -154,19 +152,19 @@ const Dashboard = () => {
         {analysis && (
           <div className="space-y-8 animate-fade-in">
             {/* Topbar Info & Score Header */}
-            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 border-b border-slate-800 pb-6">
+            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 border-b border-zinc-800 pb-6">
               <div>
                 <div className="flex items-center gap-2">
                   <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
                     {analysis.repoMetadata.name}
                   </h1>
-                  <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-800 border border-slate-700 text-slate-300">
+                  <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-zinc-800 border border-zinc-700 text-zinc-300">
                     {analysis.repoMetadata.primaryLanguage}
                   </span>
                 </div>
-                <p className="text-sm text-slate-400 mt-1.5 flex items-center gap-1">
+                <p className="text-sm text-zinc-400 mt-1.5 flex items-center gap-1">
                   <span>Repository URL:</span>
-                  <a href={analysis.repoUrl} target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:underline">
+                  <a href={analysis.repoUrl} target="_blank" rel="noopener noreferrer" className="text-white hover:underline">
                     {analysis.repoUrl}
                   </a>
                 </p>
@@ -175,7 +173,7 @@ const Dashboard = () => {
               <div className="flex gap-3">
                 <button
                   onClick={() => { setAnalysis(null); setRepoUrl(''); }}
-                  className="rounded-lg border border-slate-800 hover:border-slate-700 bg-slate-900/60 hover:bg-slate-900 px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white transition-all duration-200"
+                  className="rounded-lg border border-zinc-800 hover:border-zinc-700 bg-zinc-900/60 hover:bg-zinc-900 px-4 py-2 text-xs font-semibold text-zinc-400 hover:text-white transition-all duration-200"
                 >
                   Scan New Repo
                 </button>
@@ -208,8 +206,8 @@ const Dashboard = () => {
                   
                   <div className="space-y-1">
                     <div className="flex items-center gap-1.5">
-                      <Award className="h-4 w-4 text-indigo-400" />
-                      <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Quality Score</span>
+                      <Award className="h-4 w-4 text-zinc-400" />
+                      <span className="text-xs font-semibold uppercase tracking-wider text-zinc-400">Quality Score</span>
                     </div>
                     <h4 className="text-base font-bold text-white leading-snug">
                       {analysis.analysisResults.score >= 8 ? 'Excellent Standards' : analysis.analysisResults.score >= 5 ? 'Fair Codebase' : 'Needs Optimization'}
@@ -238,7 +236,7 @@ const Dashboard = () => {
                         ) : (
                           <AlertCircle className="h-3.5 w-3.5 text-amber-400 shrink-0" />
                         )}
-                        <span className="text-slate-300 font-medium truncate">{item.finding}</span>
+                        <span className="text-zinc-300 font-medium truncate">{item.finding}</span>
                       </div>
                     ))}
                   </div>
@@ -246,10 +244,10 @@ const Dashboard = () => {
               </div>
 
               {/* 2. Repository Summary Description */}
-              <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-6 flex flex-col justify-between backdrop-blur-md md:col-span-2">
+              <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-6 flex flex-col justify-between backdrop-blur-md md:col-span-2">
                 <div>
-                  <div className="flex items-center gap-1.5 text-slate-400 mb-2">
-                    <BookOpen className="h-4 w-4 text-indigo-400" />
+                  <div className="flex items-center gap-1.5 text-zinc-400 mb-2">
+                    <BookOpen className="h-4 w-4 text-zinc-400" />
                     <span className="text-xs font-semibold uppercase tracking-wider">Functional Summary</span>
                   </div>
                   <p className="text-sm text-slate-300 leading-relaxed">
@@ -265,9 +263,9 @@ const Dashboard = () => {
             </div>
 
             {/* Tabbed Review Details */}
-            <div className="border border-slate-800 bg-slate-900/20 rounded-xl overflow-hidden backdrop-blur-md">
+            <div className="border border-zinc-800 bg-zinc-900/20 rounded-xl overflow-hidden backdrop-blur-md">
               {/* Tab Selector */}
-              <div className="flex border-b border-slate-800 bg-slate-950/40 p-1">
+              <div className="flex border-b border-zinc-800 bg-zinc-950/40 p-1">
                 {[
                   { id: 'structure', label: 'Architecture', icon: Layers },
                   { id: 'practices', label: 'Best Practices', icon: ShieldAlert },
@@ -281,8 +279,8 @@ const Dashboard = () => {
                     onClick={() => setActiveTab(tab.id)}
                     className={`flex items-center gap-2 px-5 py-3 text-xs sm:text-sm font-semibold rounded-lg transition-all duration-200 ${
                       activeTab === tab.id 
-                        ? 'bg-slate-900 text-white shadow-sm border border-slate-800' 
-                        : 'text-slate-400 hover:text-white'
+                        ? 'bg-zinc-900 text-white shadow-sm border border-zinc-800' 
+                        : 'text-zinc-400 hover:text-white'
                     }`}
                   >
                     <tab.icon className="h-4.5 w-4.5 shrink-0" />
@@ -297,10 +295,10 @@ const Dashboard = () => {
                 {activeTab === 'structure' && (
                   <div className="space-y-4">
                     <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                      <Layers className="h-5 w-5 text-indigo-400" />
+                      <Layers className="h-5 w-5 text-zinc-400" />
                       Structural & File Organization Assessment
                     </h3>
-                    <p className="text-slate-300 text-sm leading-relaxed whitespace-pre-line">
+                    <p className="text-zinc-300 text-sm leading-relaxed whitespace-pre-line">
                       {analysis.analysisResults.structureAssessment}
                     </p>
                   </div>
@@ -327,11 +325,11 @@ const Dashboard = () => {
                         desc: analysis.analysisResults.bestPractices.missingTestsOrDocs || 'Checked and validated.' 
                       }
                     ].map((item, idx) => (
-                      <div key={idx} className="border border-slate-800 bg-slate-950/20 p-5 rounded-lg">
-                        <h4 className="text-sm font-bold text-indigo-400 uppercase tracking-wider mb-2">
+                      <div key={idx} className="border border-zinc-800 bg-zinc-950/20 p-5 rounded-lg">
+                        <h4 className="text-sm font-bold text-zinc-400 uppercase tracking-wider mb-2">
                           {item.title}
                         </h4>
-                        <p className="text-slate-300 text-sm leading-relaxed whitespace-pre-line">
+                        <p className="text-zinc-300 text-sm leading-relaxed whitespace-pre-line">
                           {item.desc}
                         </p>
                       </div>
@@ -343,14 +341,14 @@ const Dashboard = () => {
                 {activeTab === 'suggestions' && (
                   <div className="space-y-6">
                     <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                      <Sparkles className="h-5 w-5 text-indigo-400" />
+                      <Sparkles className="h-5 w-5 text-zinc-400" />
                       Actionable Recommendations
                     </h3>
                     <ul className="space-y-3.5">
                       {analysis.analysisResults.actionableSuggestions.map((suggestion, idx) => (
-                        <li key={idx} className="flex items-start gap-3 bg-slate-950/25 p-4 rounded-lg border border-slate-800/60">
-                          <CheckCircle2 className="h-5 w-5 text-indigo-400 shrink-0 mt-0.5" />
-                          <span className="text-sm text-slate-300 leading-relaxed font-medium">
+                        <li key={idx} className="flex items-start gap-3 bg-zinc-950/25 p-4 rounded-lg border border-zinc-800/60">
+                          <CheckCircle2 className="h-5 w-5 text-zinc-400 shrink-0 mt-0.5" />
+                          <span className="text-sm text-zinc-300 leading-relaxed font-medium">
                             {suggestion}
                           </span>
                         </li>
@@ -364,21 +362,21 @@ const Dashboard = () => {
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                        <FileText className="h-5 w-5 text-indigo-400" />
+                        <FileText className="h-5 w-5 text-zinc-400" />
                         Analyzed File Footprint
                       </h3>
-                      <span className="text-xs text-slate-400 bg-slate-850 px-2.5 py-1 rounded-md border border-slate-800">
+                      <span className="text-xs text-zinc-400 bg-zinc-900 px-2.5 py-1 rounded-md border border-zinc-800">
                         {analysis.analyzedFiles.length} key files selected
                       </span>
                     </div>
-                    <p className="text-xs text-slate-500 mb-2 leading-relaxed">
+                    <p className="text-xs text-zinc-500 mb-2 leading-relaxed">
                       To keep token payload lightweight, the analyzer runs a heuristic selection focusing on manifest files, entry points, and central source components based on file sizes.
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
                       {analysis.analyzedFiles.map((filepath, idx) => (
-                        <div key={idx} className="flex items-center gap-2.5 bg-slate-950/30 px-4 py-3 rounded-lg border border-slate-800/80">
-                          <ChevronRight className="h-3.5 w-3.5 text-indigo-500" />
-                          <span className="text-xs font-mono text-slate-300 truncate">
+                        <div key={idx} className="flex items-center gap-2.5 bg-zinc-950/30 px-4 py-3 rounded-lg border border-zinc-800/80">
+                          <ChevronRight className="h-3.5 w-3.5 text-zinc-500" />
+                          <span className="text-xs font-mono text-zinc-300 truncate">
                             {filepath}
                           </span>
                         </div>

@@ -37,22 +37,21 @@ const History = () => {
 
   if (loading) {
     return (
-      <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-slate-950 text-white">
+      <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-black text-white">
         <div className="flex flex-col items-center">
-          <div className="h-10 w-10 border-4 border-violet-500/20 border-t-violet-500 rounded-full animate-spin" />
-          <span className="mt-4 text-slate-400 text-sm font-semibold tracking-wider">RETRIEVING HISTORY...</span>
+          <div className="h-10 w-10 border-4 border-zinc-800 border-t-white rounded-full animate-spin" />
+          <span className="mt-4 text-zinc-400 text-sm font-semibold tracking-wider">Retrieving History...</span>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-slate-950 text-slate-100 py-10 px-4 sm:px-6 lg:px-8 relative">
-      <div className="absolute top-10 right-10 w-96 h-96 bg-indigo-600/5 rounded-full blur-[120px] pointer-events-none" />
+    <div className="min-h-[calc(100vh-4rem)] bg-black text-zinc-100 py-10 px-4 sm:px-6 lg:px-8 relative">
       
       <div className="mx-auto max-w-7xl relative">
-        <div className="flex items-center gap-3 border-b border-slate-800 pb-5 mb-8">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+        <div className="flex items-center gap-3 border-b border-zinc-800 pb-5 mb-8">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-900 text-white border border-zinc-800">
             <HistoryIcon className="h-5 w-5" />
           </div>
           <div>
@@ -76,7 +75,7 @@ const History = () => {
             </p>
             <Link
               to="/"
-              className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-violet-600 to-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:from-violet-500 hover:to-indigo-500 shadow-md shadow-indigo-500/10 transition-all duration-200"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-zinc-950 hover:bg-zinc-100 transition-all duration-200"
             >
               Analyze First Repo
               <ArrowRight className="h-4 w-4" />
@@ -87,14 +86,14 @@ const History = () => {
             {historyList.map((item) => (
               <div 
                 key={item._id} 
-                className="border border-slate-800 bg-slate-900/40 backdrop-blur-md rounded-xl p-5 hover:border-slate-700 transition-all duration-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 group"
+                className="border border-zinc-800 bg-zinc-900/40 backdrop-blur-md rounded-xl p-5 hover:border-zinc-700 transition-all duration-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 group"
               >
                 <div className="space-y-2.5 max-w-3xl">
                   <div className="flex items-center flex-wrap gap-2.5">
-                    <h3 className="text-lg font-bold text-white group-hover:text-indigo-400 transition-colors">
+                    <h3 className="text-lg font-bold text-white group-hover:text-white transition-colors">
                       {item.repoMetadata.name}
                     </h3>
-                    <span className="text-xs font-semibold px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-400">
+                    <span className="text-xs font-semibold px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-400">
                       {item.repoMetadata.primaryLanguage}
                     </span>
                     <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${getScoreColor(item.analysisResults.score)}`}>
@@ -102,28 +101,28 @@ const History = () => {
                     </span>
                   </div>
                   
-                  <p className="text-xs text-slate-500 font-medium">
+                  <p className="text-xs text-zinc-500 font-medium">
                     Owner: {item.repoMetadata.owner} &bull; URL:{' '}
-                    <a href={item.repoUrl} target="_blank" rel="noopener noreferrer" className="hover:underline text-slate-400">
+                    <a href={item.repoUrl} target="_blank" rel="noopener noreferrer" className="hover:underline text-zinc-400">
                       {item.repoUrl}
                     </a>
                   </p>
 
-                  <p className="text-sm text-slate-300 line-clamp-2 leading-relaxed">
+                  <p className="text-sm text-zinc-300 line-clamp-2 leading-relaxed">
                     {item.analysisResults.summary}
                   </p>
 
-                  <div className="flex gap-4 text-xs text-slate-500 items-center">
-                    <span className="flex items-center gap-1.5"><Calendar className="h-3.5 w-3.5 text-slate-400" /> {formatDate(item.createdAt)}</span>
-                    <span className="flex items-center gap-1"><Star className="h-3 w-3 text-slate-400" /> {item.repoMetadata.stars}</span>
-                    <span className="flex items-center gap-1"><GitBranch className="h-3 w-3 text-slate-400" /> {item.repoMetadata.forks}</span>
+                  <div className="flex gap-4 text-xs text-zinc-500 items-center">
+                    <span className="flex items-center gap-1.5"><Calendar className="h-3.5 w-3.5 text-zinc-400" /> {formatDate(item.createdAt)}</span>
+                    <span className="flex items-center gap-1"><Star className="h-3 w-3 text-zinc-400" /> {item.repoMetadata.stars}</span>
+                    <span className="flex items-center gap-1"><GitBranch className="h-3 w-3 text-zinc-400" /> {item.repoMetadata.forks}</span>
                   </div>
                 </div>
 
-                <div className="shrink-0 w-full md:w-auto pt-3 md:pt-0 border-t md:border-t-0 border-slate-800">
+                <div className="shrink-0 w-full md:w-auto pt-3 md:pt-0 border-t md:border-t-0 border-zinc-800">
                   <Link
                     to={`/history/${item._id}`}
-                    className="flex w-full md:w-auto items-center justify-center gap-1.5 rounded-lg border border-slate-800 group-hover:border-indigo-500/50 bg-slate-950/50 hover:bg-indigo-500/10 px-4 py-2.5 text-xs font-bold text-slate-300 hover:text-indigo-400 transition-all duration-200"
+                    className="flex w-full md:w-auto items-center justify-center gap-1.5 rounded-lg border border-zinc-800 group-hover:border-zinc-500 bg-zinc-950 hover:bg-zinc-900 px-4 py-2.5 text-xs font-bold text-zinc-300 hover:text-white transition-all duration-200"
                   >
                     View Full Report
                     <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform duration-200" />
